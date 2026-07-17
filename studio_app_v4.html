@@ -1,0 +1,233 @@
+﻿<!DOCTYPE html><html lang="zh-CN" data-theme="dark"><head><meta charset="utf-8"><title>智造工作室 AI 工作台</title><style>*{box-sizing:border-box;margin:0;padding:0}body{font-family:Segoe UI,sans-serif;background:var(--bg);color:var(--text);min-height:100vh}:root{--bg:#0d0d14;--surface:#14141f;--surface2:#1a1a28;--border:#252538;--text:#d8d8ec;--muted:#8888b0;--accent:#6c8aff;--success:#5dff8a;--danger:#ff5d5d;--warning:#ffb85d}[data-theme=light]{--bg:#f0f0f5;--surface:#e8e8f0;--surface2:#dddde8;--border:#c8c8d8;--text:#1a1a28;--muted:#6666a0;--accent:#3050e0;--success:#20a040;--danger:#d03030;--warning:#c07020}#login-page{display:flex;align-items:center;justify-content:center;min-height:100vh}.login-box{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:40px;width:360px;text-align:center}.login-box h2{color:var(--accent);margin-bottom:8px}.login-box p{color:var(--muted);margin-bottom:24px;font-size:.85rem}input,select,textarea{width:100%;background:var(--surface2);border:1px solid var(--border);color:var(--text);padding:10px 12px;border-radius:8px;font-size:.9rem;outline:none}input:focus{border-color:var(--accent)}button{cursor:pointer;border:none;border-radius:8px;padding:10px 20px;font-size:.9rem;font-weight:600;transition:all .2s}.btn-p{background:var(--accent);color:#fff}.btn-p:hover{filter:brightness(1.15)}.btn-p:disabled{opacity:.5}.btn-g{background:transparent;color:var(--muted);border:1px solid var(--border)}.btn-g:hover{background:var(--surface2);color:var(--text)}.login-btn{width:100%;margin-top:16px}.login-label{display:block;text-align:left;color:var(--muted);font-size:.8rem;margin-top:14px;margin-bottom:6px;font-weight:500}.login-hint{text-align:center;color:var(--muted);font-size:.72rem;margin-top:10px;margin-bottom:4px}.error-msg{color:var(--danger);font-size:.8rem;margin-top:8px;display:none}#app,#login-page{display:none}#login-page.show{display:flex}#app.show{display:block}#sidebar{position:fixed;left:0;top:0;bottom:0;width:200px;background:var(--surface);border-right:1px solid var(--border);padding:16px 8px;overflow-y:auto}.sidebar-item{display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:8px;color:var(--muted);cursor:pointer;font-size:.88rem;margin-bottom:2px}.sidebar-item:hover{background:var(--surface2);color:var(--text)}.sidebar-item.active{background:var(--accent);color:#fff}#topbar{display:flex;align-items:center;justify-content:space-between;padding:12px 20px;background:var(--surface);border-bottom:1px solid var(--border);margin-left:200px}#ai-indicator{display:flex;align-items:center;gap:6px;font-size:.8rem;color:var(--muted)}.dot{width:8px;height:8px;border-radius:50%;background:var(--muted)}.dot.online{background:var(--success)}.dot.offline{background:var(--danger)}#content{margin-left:200px;padding:24px;max-width:900px}.card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:20px;margin-bottom:16px}.card-title{font-size:1.05rem;font-weight:600;margin-bottom:12px;color:var(--accent)}.stat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:12px}.stat-card{background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:14px;text-align:center}.stat-label{font-size:.75rem;color:var(--muted);margin-bottom:4px}.stat-value{font-size:1.3rem;font-weight:700}.stat-value.income{color:var(--success)}.stat-value.expense{color:var(--danger)}.stat-value.balance{color:var(--accent)}.row{display:flex;gap:12px;margin-bottom:12px}.row>*{flex:1}.flex-end{justify-content:flex-end}table{width:100%;border-collapse:collapse;font-size:.85rem}th{text-align:left;color:var(--muted);padding:8px 6px;border-bottom:1px solid var(--border);font-weight:500}td{padding:8px 6px;border-bottom:1px solid var(--border)}.task-item{display:flex;align-items:center;padding:10px 12px;background:var(--surface2);border:1px solid var(--border);border-radius:8px;margin-bottom:6px}.task-pri{width:4px;height:32px;border-radius:2px;margin-right:10px;flex-shrink:0}.pri-h{background:var(--danger)}.pri-m{background:var(--warning)}.pri-l{background:var(--accent)}.task-body{flex:1;min-width:0}.task-title{font-size:.88rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.task-meta{font-size:.75rem;color:var(--muted);margin-top:2px}.badge{padding:2px 8px;border-radius:12px;font-size:.72rem;font-weight:600;display:inline-block}.b-todo{background:rgba(108,138,255,.2);color:var(--accent)}.b-done{background:rgba(93,255,138,.2);color:var(--success)}.b-doing{background:rgba(255,184,93,.2);color:var(--warning)}.msg-row{display:flex;gap:10px;margin-top:12px}#cmd-bar{position:fixed;bottom:20px;right:20px;z-index:200}#cmd-btn{width:48px;height:48px;border-radius:50%;background:var(--accent);color:#fff;font-size:1.3rem;border:none;cursor:pointer}#cmd-pop{display:none;position:absolute;bottom:56px;right:0;width:320px;background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:16px;box-shadow:0 8px 32px rgba(0,0,0,.5)}#cmd-pop h4{color:var(--accent);margin-bottom:10px;font-size:.9rem}.cmd-ex{font-size:.78rem;color:var(--muted);padding:4px 0;border-bottom:1px solid var(--border)}.theme-row{display:flex;gap:8px;margin-bottom:12px}.theme-btn{padding:6px 14px;font-size:.8rem;border-radius:20px;border:1px solid var(--border);background:transparent;color:var(--muted);cursor:pointer}.theme-btn.active{border-color:var(--accent);background:rgba(108,138,255,.15);color:var(--accent)}#toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(60px);background:var(--surface);border:1px solid var(--border);color:var(--text);padding:10px 24px;border-radius:8px;font-size:.88rem;opacity:0;transition:all .3s;z-index:999}#toast.show{opacity:1;transform:translateX(-50%) translateY(0)}.page{display:none}.page.active{display:block}.loading,.empty{color:var(--muted);text-align:center;padding:40px;font-size:.88rem}.empty{padding:24px}.tabs{display:flex;gap:4px;margin-bottom:16px;border-bottom:1px solid var(--border)}.tab{padding:8px 16px;cursor:pointer;color:var(--muted);font-size:.85rem;border-bottom:2px solid transparent;margin-bottom:-1px}.tab.active{color:var(--accent);border-bottom-color:var(--accent)}#fin-table{max-height:360px;overflow-y:auto}.member-card{display:flex;align-items:center;gap:12px;padding:10px;background:var(--surface2);border:1px solid var(--border);border-radius:8px;margin-bottom:6px}.member-avatar{width:36px;height:36px;border-radius:50%;background:var(--accent);display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:.9rem}.member-name{font-size:.9rem;font-weight:600}.member-role{font-size:.75rem;color:var(--muted)}.divider{height:1px;background:var(--border);margin:16px 0}</style></head><body><div id="login-page" class="show"><div class="login-box"><h2>智造工作室 AI 工作台</h2><p>欢迎回来，请登录</p>
+<label class="login-label">账号</label>
+<input type="text" id="login-user" placeholder="账号 (例如: 熊科瑞)" autocomplete="off" value="熊科瑞">
+<label class="login-label">密码</label>
+<input type="password" id="login-pw" placeholder="密码" style="margin-top:10px" autocomplete="off" value="智造2026">
+<div class="login-hint">默认密码: 智造2026（不需修改）</div>
+<div class="error-msg" id="login-error"></div>
+<button class="btn-p login-btn" id="login-btn">登录</button></div></div>
+
+<div id="app">
+<div id="sidebar">
+<div style="padding:8px 12px 16px;color:var(--accent);font-weight:700;margin-bottom:8px">智造工作室</div>
+<div class="sidebar-item active" data-page="home">首页</div>
+<div class="sidebar-item" data-page="ai">AI 对话</div>
+<div class="sidebar-item" data-page="finance">记账</div>
+<div class="sidebar-item" data-page="tasks">任务</div>
+<div class="sidebar-item" data-page="scripts">内容脚本</div>
+<div class="sidebar-item" data-page="team">团队</div>
+<div class="sidebar-item" data-page="research">联网调研</div>
+<div class="sidebar-item" data-page="code">Arduino</div>
+<div class="sidebar-item" data-page="wizard">新生向导</div>
+<div class="sidebar-item" data-page="video">视频 AI</div>
+<div class="sidebar-item" data-page="settings">设置</div>
+<div style="flex:1"></div>
+<div class="sidebar-item" id="logout-btn" style="color:var(--danger)">退出</div>
+</div>
+<div id="topbar">
+<div style="font-size:1rem;font-weight:600" id="page-title">首页</div>
+<div id="ai-indicator"><span class="dot offline" id="ai-dot"></span><span id="ai-label">检测中</span></div>
+<div style="margin-left:auto;display:flex;gap:8px;align-items:center"><span id="role-badge" style="font-size:.75rem;padding:2px 8px;border-radius:12px;background:var(--surface);color:var(--muted)"></span><span id="user-name" style="font-size:.85rem"></span></div>
+</div>
+<div id="content">
+
+<div id="page-home" class="page active">
+<div class="card"><div class="card-title">财务总览</div><div class="stat-grid">
+<div class="stat-card"><div class="stat-label">收入</div><div class="stat-value income" id="s-income">-</div></div>
+<div class="stat-card"><div class="stat-label">支出</div><div class="stat-value expense" id="s-expense">-</div></div>
+<div class="stat-card"><div class="stat-label">余额</div><div class="stat-value balance" id="s-balance">-</div></div>
+</div></div>
+<div class="card"><div class="card-title">任务状态</div><div class="stat-grid" style="grid-template-columns:repeat(4,1fr)">
+<div class="stat-card"><div class="stat-label">总数</div><div class="stat-value" id="s-total">-</div></div>
+<div class="stat-card"><div class="stat-label">待办</div><div class="stat-value" style="color:var(--warning)" id="s-todo">-</div></div>
+<div class="stat-card"><div class="stat-label">进行中</div><div class="stat-value" style="color:var(--accent)" id="s-doing">-</div></div>
+<div class="stat-card"><div class="stat-label">已完成</div><div class="stat-value" style="color:var(--success)" id="s-done">-</div></div>
+</div></div>
+<div class="card"><div class="card-title">最近任务</div><div id="home-tasks"><div class="loading">加载中...</div></div></div>
+</div>
+
+<div id="page-ai" class="page">
+<div class="card"><div class="card-title">AI 智能顾问</div><div id="adv-msgs" style="max-height:340px;overflow-y:auto;margin-bottom:12px"></div>
+<div class="msg-row"><input type="text" id="adv-input" placeholder="描述你的问题或需求..."><button class="btn-p" id="adv-send">发送</button></div></div>
+<div class="card"><div class="card-title">快捷指令</div><div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
+<button class="btn-g" id="qa1">分析优势不足</button>
+<button class="btn-g" id="qa2">制定月度计划</button>
+<button class="btn-g" id="qa3">评估财务</button>
+<button class="btn-g" id="qa4">分工建议</button>
+</div></div></div>
+
+<div id="page-finance" class="page">
+<div class="card"><div class="card-title">新增记账</div>
+<div class="row"><select id="fin-type"><option value="income">收入</option><option value="expense">支出</option></select>
+<input type="number" id="fin-amount" placeholder="金额"></div>
+<div class="row"><input type="text" id="fin-desc" placeholder="分类 - 项目"><input type="text" id="fin-note" placeholder="备注"></div>
+<div class="flex-end"><button class="btn-p" id="fin-add">记账</button></div></div>
+<div class="card"><div class="card-title">收支记录</div><div id="fin-table"><div class="loading">加载中...</div></div></div>
+</div>
+
+<div id="page-tasks" class="page">
+<div class="card"><div class="card-title">新增任务</div>
+<input type="text" id="task-title" placeholder="任务标题" style="margin-bottom:8px">
+<div class="row"><select id="task-priority"><option value="low">低优先级</option><option value="mid">中优先级</option><option value="high">高优先级</option></select>
+<button class="btn-p" id="task-add-btn" data-need="editor">添加</button></div></div>
+<div class="card"><div class="card-title">任务列表</div>
+<div class="tabs"><div class="tab active" data-filter="all">全部</div><div class="tab" data-filter="todo">待办</div><div class="tab" data-filter="doing">进行中</div><div class="tab" data-filter="done">已完成</div></div>
+<div id="task-list"><div class="loading">加载中...</div></div></div>
+</div>
+
+<div id="page-team" class="page">
+<div class="card" id="user-mgmt-card" style="display:none"><div class="card-title">用户管理 <span style="font-size:.75rem">（仅管理员可见）</span></div><div id="user-list"></div><button class="btn-p" id="add-user-btn">+ 添加用户</button><div id="add-user-form" style="display:none;margin-top:12px;border-top:1px solid var(--border);padding-top:12px"><input id="nu-username" placeholder="用户名（2-20字）" style="width:100%;margin-bottom:6px"><input id="nu-password" type="password" placeholder="密码（至少4位）" style="width:100%;margin-bottom:6px"><select id="nu-role" style="width:100%;margin-bottom:6px"><option value="editor">编辑（可写）</option><option value="readonly">只读</option><option value="admin">管理员</option></select><input id="nu-display" placeholder="显示名（可选）" style="width:100%;margin-bottom:6px"><input id="nu-skill" placeholder="技能（可选）" style="width:100%;margin-bottom:6px"><input id="nu-desc" placeholder="简介（可选）" style="width:100%;margin-bottom:6px"><button class="btn-p" id="nu-save">创建</button><button class="btn-s" id="nu-cancel">取消</button><div id="nu-msg" style="font-size:.8rem;margin-top:6px"></div></div></div>
+<div class="card"><div class="card-title">团队成员</div><div id="team-list"><div class="loading">加载中...</div></div></div>
+</div>
+
+<div id="page-research" class="page">
+<div class="card"><div class="card-title">联网市场调研</div>
+<input type="text" id="res-query" placeholder="输入调研主题，如：3D打印市场现状" style="margin-bottom:8px">
+<button class="btn-p" id="res-btn">开始调研</button>
+<div id="res-result" style="margin-top:16px"><div class="empty">输入调研主题后点击开始调研</div></div></div>
+</div>
+
+<div id="page-code" class="page">
+<div class="card"><div class="card-title">Arduino 代码生成</div>
+<textarea id="arduino-desc" rows="4" placeholder="描述你的 Arduino 项目需求"></textarea>
+<button class="btn-p" id="arduino-btn" style="margin-top:10px">生成代码</button>
+<div id="code-result" style="margin-top:16px"></div></div>
+</div>
+
+<div id="page-wizard" class="page">
+<div class="card"><div class="card-title">新生布局向导</div>
+<div id="wiz-step" style="color:var(--muted);margin-bottom:12px">步骤 1/5</div>
+<div id="wiz-question" style="margin-bottom:16px"></div>
+<input type="text" id="wiz-answer" placeholder="请输入你的回答">
+<div style="margin-top:12px;display:flex;gap:8px">
+<button class="btn-g" id="wiz-reset">重新开始</button>
+<button class="btn-p" id="wiz-next">下一步</button></div>
+<div id="wiz-result" style="margin-top:16px"></div></div>
+</div>
+
+<div id="page-video" class="page">
+<div class="card"><div class="card-title">视频 AI 脚本生成</div>
+<input type="text" id="video-topic" placeholder="输入视频主题" style="margin-bottom:8px">
+<textarea id="video-desc" rows="3" placeholder="视频描述或大纲（可选）" style="margin-bottom:8px"></textarea>
+<button class="btn-p" id="video-btn">生成脚本</button>
+<div id="video-result" style="margin-top:16px"><div class="empty">输入视频主题开始生成</div></div></div>
+</div>
+
+<div id="page-scripts" class="page">
+<div class="card"><div class="card-title">内容脚本库</div>
+<textarea id="script-input" rows="4" placeholder="输入脚本内容保存"></textarea>
+<button class="btn-p" id="script-save" data-need="editor" style="margin-top:8px">保存脚本</button>
+<div id="scripts-list" style="margin-top:16px"></div></div>
+</div>
+
+<div id="page-settings" class="page">
+<div class="card"><div class="card-title">外观设置</div>
+<div class="theme-row">
+<button class="theme-btn active" id="theme-dark">深色</button>
+<button class="theme-btn" id="theme-light">浅色</button>
+</div><div class="divider"></div><div class="card-title">刷新设置</div>
+<div class="row"><select id="refresh-interval"><option value="0">关闭</option><option value="15">每15秒</option><option value="30" selected>每30秒</option><option value="60">每60秒</option></select>
+<button class="btn-p" id="settings-save">保存</button></div>
+<div id="settings-msg" style="color:var(--success);font-size:.82rem;margin-top:8px"></div>
+</div><div class="card" id="user-mgmt-card" style="display:none"><div class="card-title">用户管理 <span style="font-size:.75rem">（仅管理员可见）</span></div><div id="user-list"></div><button class="btn-p" id="add-user-btn">+ 添加用户</button><div id="add-user-form" style="display:none;margin-top:12px;border-top:1px solid var(--border);padding-top:12px"><input id="nu-username" placeholder="用户名（2-20字）" style="width:100%;margin-bottom:6px"><input id="nu-password" type="password" placeholder="密码（至少4位）" style="width:100%;margin-bottom:6px"><select id="nu-role" style="width:100%;margin-bottom:6px"><option value="editor">编辑（可写）</option><option value="readonly">只读</option><option value="admin">管理员</option></select><input id="nu-display" placeholder="显示名（可选）" style="width:100%;margin-bottom:6px"><input id="nu-skill" placeholder="技能（可选）" style="width:100%;margin-bottom:6px"><input id="nu-desc" placeholder="简介（可选）" style="width:100%;margin-bottom:6px"><button class="btn-p" id="nu-save">创建</button><button class="btn-s" id="nu-cancel">取消</button><div id="nu-msg" style="font-size:.8rem;margin-top:6px"></div></div></div>
+<div class="card"><div class="card-title">团队成员</div><div id="member-list"></div></div>
+</div>
+
+</div></div>
+
+<div id="cmd-bar"><div id="cmd-pop"><h4>指令中心</h4>
+<div class="cmd-ex">添加任务：添加 任务名称 - 高优先级</div>
+<div class="cmd-ex">记账：记账 100元 收入 项目说明</div>
+<div class="cmd-ex">标记完成：完成 任务名称</div>
+<div class="cmd-ex">查询：查余额 / 查任务</div></div>
+<button id="cmd-btn" title="Ctrl+Shift+K">&#9000;</button></div>
+<div id="toast"></div>
+<script>
+var _tasks=[],_filter='all',_wizStep=0,_wizData={},_advConv=[];var _role='',_me='',_dn='';
+var _wizQ=['你希望向哪类人群推广我们的产品或服务？','当前主要的市场推广渠道有哪些？','你希望通过 AI 顾问解决什么问题？','团队目前最需要支持的方向是什么？','你期望什么时候开始执行推广计划？'];
+var _ME='/api/auth/me',_LOGIN='/api/auth/login',_LOGOUT='/api/auth/logout',_OLLAMA='/api/ollama_status',_STATS='/api/stats',_TA='/api/tasks/add',_TU='/api/tasks/update',_FIN='/api/finance',_FA='/api/finance/add',_TEAM='/api/team',_SU='/api/settings/update',_SCRIPTS='/api/scripts',_SA='/api/scripts/add',_ADV='/api/advisor/chat',_WIZ='/api/wizard/generate',_VIDEO='/api/video/generate',_WEB='/api/research/web',_ARDUINO='/api/code/arduino',_CMD='/api/command',_TASKS='/api/tasks';
+function $(id){return document.getElementById(id);}
+function applyRoleUI(){var isAdmin=_role==='admin';var isEditor=_role==='admin'||_role==='editor';
+if($('user-name'))$('user-name').textContent=_dn||_me;if($('role-badge'))$('role-badge').textContent={admin:'管理员',editor:'编辑',readonly:'只读'}[_role]||'';
+if($('user-mgmt-card'))$('user-mgmt-card').style.display=isAdmin?'block':'none';
+document.querySelectorAll('[data-need]').forEach(function(el){var need=el.getAttribute('data-need');var show=(need==='editor'&&isEditor)||(need==='admin'&&isAdmin);el.style.display=show?'':'none';});
+if(isAdmin)loadUsers();}
+function loadUsers(){fetch('/api/admin/users').then(function(r){return r.json()}).then(function(d){if(!d.ok)return;var html='';var roleMap={admin:'管理员',editor:'编辑',readonly:'只读'};d.users.forEach(function(u){html+='<div style="border:1px solid var(--border);border-radius:8px;padding:8px;margin-bottom:6px"><div style="font-weight:600">'+eH(u.display_name||u.username)+' <span style="font-size:.7rem;color:var(--muted)">'+(roleMap[u.role]||u.role)+'</span>'+(u.status!=='active'?' <span style="color:var(--danger);font-size:.7rem">[禁用]</span>':'')+'</div>';if(u.skill)html+='<div style="font-size:.78rem;color:var(--muted)">技能：'+eH(u.skill)+'</div>';if(u.description)html+='<div style="font-size:.78rem;color:var(--muted)">'+eH(u.description)+'</div>';html+='<div style="margin-top:4px"><button class="btn-s" onclick="editUser('+u.id+')">编辑</button> <button class="btn-s" onclick="toggleUser('+u.id+',\''+(u.status==='active'?'disabled':'active')+'\')">'+(u.status==='active'?'禁用':'启用')+'</button> <button class="btn-s" onclick="delUser('+u.id+')">删除</button></div></div>';});$('user-list').innerHTML=html;}).catch(function(){});}
+function editUser(id){var pwd=prompt('设置新密码（至少4位，留空则不修改）');if(pwd===null)return;var role=prompt('角色：admin / editor / readonly','editor');if(role===null)return;if(['admin','editor','readonly'].indexOf(role)<0){alert('无效角色');return;}fetch('/api/admin/users/update',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({id:id,role:role,password:pwd||undefined})}).then(function(r){return r.json()}).then(function(d){if(d.ok){loadUsers();}else alert(d.error||'失败');});}
+function toggleUser(id,status){fetch('/api/admin/users/update',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({id:id,status:status})}).then(function(r){return r.json()}).then(function(d){if(d.ok){loadUsers();}else alert(d.error||'失败');});}
+function delUser(id){if(!confirm('确认删除该用户？'))return;fetch('/api/admin/users/delete',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({id:id})}).then(function(r){return r.json()}).then(function(d){if(d.ok){loadUsers();}else alert(d.error||'失败');});}
+
+function eH(s){if(!s)return'';return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+function checkSession(){fetch(_ME).then(function(r){return r.json()}).then(function(d){if(d.logged_in){_role=d.role;_me=d.user;_dn=d.display_name||d.user;showApp();loadAll();applyRoleUI();}else{showLogin();}}).catch(function(){showLogin();});}
+function showLogin(){$('login-page').classList.add('show');$('app').classList.remove('show');}
+function showApp(){$('login-page').classList.remove('show');$('app').classList.add('show');}
+function doLogin(){var u=$('login-user').value;var p=$('login-pw').value;fetch(_LOGIN,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({user:u,password:p})}).then(function(r){return r.json()}).then(function(d){if(d.ok||d.success){_role=d.role;_me=d.user;_dn=d.display_name||d.user;showApp();loadAll();applyRoleUI();}else{var el=$('login-error');el.textContent=d.message||d.error||'登录失败';el.style.display='block';}}).catch(function(e){var el=$('login-error');el.textContent='网络错误: '+e.message;el.style.display='block';});}
+function doLogout(){fetch(_LOGOUT,{method:'POST'}).then(function(){showLogin();});}
+function checkAI(){fetch(_OLLAMA).then(function(r){return r.json()}).then(function(d){var dot=$('ai-dot');var lbl=$('ai-label');if(d.online){dot.className='dot online';lbl.textContent='AI 在线';}else{dot.className='dot offline';lbl.textContent='AI 离线';}}).catch(function(){$('ai-dot').className='dot offline';$('ai-label').textContent='AI 离线';});}
+function loadStats(){fetch(_STATS).then(function(r){return r.json()}).then(function(d){$('s-income').textContent='¥'+(d.income||0).toLocaleString();$('s-expense').textContent='¥'+(d.expense||0).toLocaleString();$('s-balance').textContent='¥'+(d.balance||0).toLocaleString();});}
+function refreshStats(){if($('app').classList.contains('show')){loadStats();}}
+function loadTasks(){fetch(_TASKS).then(function(r){return r.json()}).then(function(d){_tasks=d.tasks||[];renderTasks();renderHomeTasks();});}
+function renderHomeTasks(){var el=$('home-tasks');var recent=_tasks.slice(-5).reverse();el.innerHTML=recent.length?recent.map(function(t){return taskHTML(t);}).join(''):'<div class=empty>暂无任务</div>';}
+function renderTasks(){var el=$('task-list');var filtered=_filter==='all'?_tasks:_tasks.filter(function(t){return t.status===_filter;});el.innerHTML=filtered.length?filtered.map(function(t){return taskHTML(t);}).join(''):'<div class=empty>暂无任务</div>';var todo=0,doing=0,done=0;_tasks.forEach(function(t){if(t.status==='todo')todo++;else if(t.status==='doing')doing++;else done++;});$('s-total').textContent=_tasks.length;$('s-todo').textContent=todo;$('s-doing').textContent=doing;$('s-done').textContent=done;}
+function taskHTML(t){var pri=t.priority||'low';var badge=t.status==='done'?'<span class="badge b-done">完成</span>':t.status==='doing'?'<span class="badge b-doing">进行中</span>':'<span class="badge b-todo">待办</span>';var doneBtn=t.status==='done'?'':'<button class=btn-g style="padding:4px 8px;font-size:.72rem" onclick=doneTask('+t.id+')>完成</button>';return '<div class=task-item><div class=task-pri pri-'+pri+'></div><div class=task-body><div class=task-title>'+eH(t.title)+'</div><div class=task-meta>'+badge+' · '+eH(t.assignee||'')+'</div></div><div>'+doneBtn+'</div></div>';}
+function addTask(){var title=$('task-title').value;var priority=$('task-priority').value;if(!title){toast('请输入任务标题');return;}fetch(_TA,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({title:title,priority:priority})}).then(function(r){return r.json()}).then(function(d){if(d.success){$('task-title').value='';toast('任务已添加');loadTasks();}else{toast(d.message||'添加失败');}});}
+function doneTask(id){fetch(_TU,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({id:id,status:'done'})}).then(function(r){return r.json()}).then(function(d){if(d.success){loadTasks();}else{toast(d.message);}});}
+function filterTasks(f,el){_filter=f;document.querySelectorAll('.tab').forEach(function(t){t.classList.remove('active');});if(el)el.classList.add('active');renderTasks();}
+function loadFin(){fetch(_FIN).then(function(r){return r.json()}).then(function(d){var rows=d.records||[];var el=$('fin-table');if(!rows.length){el.innerHTML='<div class=empty>暂无记录</div>';return;}el.innerHTML='<table><thead><tr><th>日期</th><th>类型</th><th>金额</th><th>说明</th></tr></thead><tbody>'+rows.map(function(r){var amt=(r.type||'').indexOf('支出')>=0?'<span style="color:var(--danger)">-¥'+r.amount+'</span>':'<span style="color:var(--success)">+¥'+r.amount+'</span>';return '<tr><td>'+eH(r.date||'')+'</td><td>'+eH(r.type||'')+'</td><td>'+amt+'</td><td>'+eH(r.note||'')+'</td></tr>';}).join('')+'</tbody></table>';});}
+function addFin(){var type=$('fin-type').value;var amount=parseFloat($('fin-amount').value);var desc=$('fin-desc').value;var note=$('fin-note').value;if(!amount||amount<=0){toast('请输入有效金额');return;}fetch(_FA,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({type:type,amount:amount,description:desc,note:note})}).then(function(r){return r.json()}).then(function(d){if(d.success){$('fin-amount').value='';$('fin-desc').value='';$('fin-note').value='';toast('记账成功');loadFin();loadStats();}else{toast(d.message||'记账失败');}});}
+function loadTeam(){fetch(_TEAM).then(function(r){return r.json()}).then(function(d){var members=d.members||[];$('team-list').innerHTML=members.map(function(m){return '<div class=member-card><div class=member-avatar>'+eH((m.name||'?').substring(0,2))+'</div><div><div class=member-name>'+eH(m.name||'')+'</div><div class=member-role>'+eH(m.role||'')+'</div></div></div>';}).join('');$('member-list').innerHTML=members.map(function(m){return '<div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--border)"><span>'+eH(m.name||'')+'</span><span style="color:var(--muted);font-size:.8rem">'+eH(m.role||'')+'</span></div>';}).join('');});}
+function doResearch(){var q=$('res-query').value;if(!q){toast('请输入调研主题');return;}var btn=$('res-btn');btn.disabled=true;btn.textContent='调研中...';$('res-result').innerHTML="<div class=loading>联网搜索中，请稍候...</div>";fetch(_WEB,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({query:q})}).then(function(r){return r.json()}).then(function(d){btn.disabled=false;btn.textContent='开始调研';var html=d.results?"<div style='margin-bottom:12px;color:var(--muted);font-size:.82rem'>找到 "+(d.results.length||0)+' 条结果</div>':'';html+=d.report?"<div style='line-height:1.7;font-size:.88rem;white-space:pre-wrap'>"+eH(d.report)+'</div>':"<div class=empty>调研失败："+(d.error||'未知错误')+'</div>';$('res-result').innerHTML=html;}).catch(function(){btn.disabled=false;btn.textContent='开始调研';$('res-result').innerHTML="<div class=empty>请求失败</div>";});}
+function generateCode(){var desc=$('arduino-desc').value;if(!desc){toast('请描述 Arduino 项目');return;}var btn=$('arduino-btn');btn.disabled=true;btn.textContent='生成中...';$('code-result').innerHTML="<div class=loading>AI 生成中，请稍候...</div>";fetch(_ARDUINO,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({description:desc})}).then(function(r){return r.json()}).then(function(d){btn.disabled=false;btn.textContent='生成代码';if(d.code){var esc=d.code.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');$('code-result').innerHTML="<pre style='background:var(--surface2);padding:14px;border-radius:8px;font-size:.78rem;overflow-x:auto;white-space:pre'>"+esc+'</pre>';}else{$('code-result').innerHTML="<div class=empty>生成失败："+(d.error||'')+'</div>';}}).catch(function(){btn.disabled=false;btn.textContent='生成代码';$('code-result').innerHTML="<div class=empty>请求失败</div>";});}
+function startWizard(){_wizStep=0;_wizData={};$('wiz-result').innerHTML='';showWizStep();}
+function showWizStep(){$('wiz-step').textContent='步骤 '+(_wizStep+1)+'/5';$('wiz-question').textContent=_wizQ[_wizStep];$('wiz-answer').value='';}
+function submitWizard(){var ans=$('wiz-answer').value;_wizData['q'+_wizStep]=ans;_wizStep++;if(_wizStep<_wizQ.length){showWizStep();return;}$('wiz-question').textContent='生成中...';$('wiz-result').innerHTML="<div class=loading>AI 方案生成中...</div>";fetch(_WIZ,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(_wizData)}).then(function(r){return r.json()}).then(function(d){var plan=d.plan||d.error||'生成失败';$('wiz-result').innerHTML="<div style='background:var(--surface2);padding:16px;border-radius:8px;white-space:pre-wrap;font-size:.88rem;line-height:1.7'>"+eH(plan)+'</div>';$('wiz-step').textContent='完成';}).catch(function(){$('wiz-result').innerHTML="<div class=empty>生成失败</div>";});}
+function generateVideo(){var topic=$('video-topic').value;var desc=$('video-desc').value;if(!topic){toast('请输入视频主题');return;}var btn=$('video-btn');btn.disabled=true;btn.textContent='生成中...';$('video-result').innerHTML="<div class=loading>视频脚本生成中...</div>";fetch(_VIDEO,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({topic:topic,description:desc})}).then(function(r){return r.json()}).then(function(d){btn.disabled=false;btn.textContent='生成脚本';var out=d.script||d.error||'生成失败';$('video-result').innerHTML="<div style='background:var(--surface2);padding:16px;border-radius:8px;white-space:pre-wrap;font-size:.88rem;line-height:1.7'>"+eH(out)+'</div>';}).catch(function(){btn.disabled=false;btn.textContent='生成脚本';$('video-result').innerHTML="<div class=empty>生成失败</div>";});}
+function loadScripts(){fetch(_SCRIPTS).then(function(r){return r.json()}).then(function(d){var rows=d.scripts||[];$('scripts-list').innerHTML=rows.length?rows.map(function(s){return "<div style='background:var(--surface2);padding:12px;border-radius:8px;margin-bottom:8px'><div style='font-size:.8rem;color:var(--muted);margin-bottom:4px'>"+eH(s.title||'')+'</div><div style=font-size:.85rem>'+eH((s.content||'').substring(0,100))+'</div></div>';}).join(''):"<div class=empty>暂无脚本</div>";});}
+function saveScript(){var content=$('script-input').value;if(!content){toast('请输入脚本内容');return;}fetch(_SA,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({title:'脚本',content:content})}).then(function(r){return r.json()}).then(function(d){if(d.success){$('script-input').value='';toast('已保存');loadScripts();}else{toast('保存失败');}});}
+function sendAdvisor(){var input=$('adv-input');var msg=input.value.trim();if(!msg)return;_advConv.push({role:'user',content:msg});input.value='';renderAdv();fetch(_ADV,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({message:msg,history:_advConv})}).then(function(r){return r.json()}).then(function(d){if(d.reply){_advConv.push({role:'assistant',content:d.reply});renderAdv();}else{toast('AI 回复失败');}}).catch(function(){toast('AI 连接失败');});}
+function quickAdv(q){$('adv-input').value=q;sendAdvisor();}
+function renderAdv(){var el=$('adv-msgs');el.innerHTML=_advConv.map(function(m){var bg=m.role==='user'?'background:var(--accent);color:#fff':'background:var(--surface2)';return "<div style='padding:8px 12px;border-radius:8px;margin-bottom:6px;"+bg+">"+eH(m.content)+'</div>';}).join('');el.scrollTop=el.scrollHeight;}
+function saveSettings(){var th=$('theme-dark').classList.contains('active')?'dark':'light';var iv=parseInt($('refresh-interval').value)||0;localStorage.setItem('theme',th);localStorage.setItem('ri',iv);fetch(_SU,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({theme:th,refresh_interval:iv})}).then(function(r){return r.json()}).then(function(d){var el=$('settings-msg');el.textContent='设置已保存';setTimeout(function(){el.textContent='';},2000);});}
+function setTheme(t){document.documentElement.setAttribute('data-theme',t);$('theme-dark').classList.toggle('active',t==='dark');$('theme-light').classList.toggle('active',t==='light');localStorage.setItem('theme',t);}
+function toggleCmd(){var p=$('cmd-pop');var shown=p.style.display==='block';p.style.display=shown?'none':'block';if(!shown&&!$('cmd-in')){var inp=document.createElement('input');inp.id='cmd-in';inp.placeholder='输入指令，回车执行...';inp.style='margin-bottom:8px';inp.onkeydown=function(e){if(e.key===13){executeCmd(this.value);}};p.insertBefore(inp,p.children[1]);inp.focus();}}
+function executeCmd(text){$('cmd-pop').style.display='none';fetch(_CMD,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({text:text})}).then(function(r){return r.json()}).then(function(d){toast(d.success?(d.message||'执行成功'):(d.message||'执行失败'));}).catch(function(){toast('指令执行失败');});}
+function loadAll(){loadStats();loadTasks();loadFin();loadTeam();loadScripts();}
+function showPage(name){var titles={home:'首页',ai:'AI 对话',finance:'记账',tasks:'任务',scripts:'内容脚本',team:'团队',research:'联网调研',code:'Arduino',wizard:'新生向导',video:'视频 AI',settings:'设置'};$('page-title').textContent=titles[name]||name;document.querySelectorAll('.page').forEach(function(p){p.classList.remove('active');});var el=$('page-'+name);if(el)el.classList.add('active');document.querySelectorAll('.sidebar-item').forEach(function(s){s.classList.remove('active');});var nav=document.querySelector(".sidebar-item[data-page='"+name+"']");if(nav)nav.classList.add('active');}
+function toast(msg){var el=$('toast');el.textContent=msg;el.classList.add('show');setTimeout(function(){el.classList.remove('show');},2500);}
+(function(){
+  checkSession();checkAI();setInterval(checkAI,30000);
+  var iv=parseInt(localStorage.getItem('ri')||'30');$('refresh-interval').value=iv;
+  if(iv>0)setInterval(refreshStats,iv*1000);
+  setTheme(localStorage.getItem('theme')||'dark');
+  $('login-btn').onclick=doLogin;
+  $('login-pw').onkeydown=function(e){if(e.key==='Enter')doLogin();};
+  $('logout-btn').onclick=doLogout;
+  document.querySelectorAll('.sidebar-item[data-page]').forEach(function(el){el.onclick=function(){showPage(el.dataset.page);};});
+  $('task-add-btn').onclick=addTask;
+  $('fin-add').onclick=addFin;
+  $('adv-send').onclick=sendAdvisor;
+  $('adv-input').onkeydown=function(e){if(e.key==='Enter')sendAdvisor();};
+  $('res-btn').onclick=doResearch;
+  $('arduino-btn').onclick=generateCode;
+  $('wiz-reset').onclick=startWizard;
+  $('wiz-next').onclick=submitWizard;
+  $('wiz-answer').onkeydown=function(e){if(e.key==='Enter')submitWizard();};
+  $('video-btn').onclick=generateVideo;
+  $('script-save').onclick=saveScript;
+  $('settings-save').onclick=saveSettings;
+  $('theme-dark').onclick=function(){setTheme('dark');};
+  $('theme-light').onclick=function(){setTheme('light');};
+  $('cmd-btn').onclick=toggleCmd;
+  $('qa1').onclick=function(){quickAdv('分析我们的项目优势和不足');};
+  $('qa2').onclick=function(){quickAdv('帮我们制定下个月的工作计划');};
+  $('qa3').onclick=function(){quickAdv('评估我们的财务状况和建议');};
+  $('qa4').onclick=function(){quickAdv('给出团队分工优化建议');};
+  document.querySelectorAll('.tab[data-filter]').forEach(function(el){el.onclick=function(){filterTasks(el.dataset.filter,this);};});
+})();
+
+document.addEventListener('DOMContentLoaded',function(){
+if($('add-user-btn'))$('add-user-btn').onclick=function(){$('add-user-form').style.display='block';$('add-user-btn').style.display='none';};
+if($('nu-cancel'))$('nu-cancel').onclick=function(){$('add-user-form').style.display='none';$('add-user-btn').style.display='inline-block';};
+if($('nu-save'))$('nu-save').onclick=function(){var data={username:$('nu-username').value.trim(),password:$('nu-password').value,role:$('nu-role').value,display_name:$('nu-display').value.trim(),skill:$('nu-skill').value.trim(),description:$('nu-desc').value.trim()};if(!data.username||!data.password){$('nu-msg').textContent='用户名和密码必填';$('nu-msg').style.color='var(--danger)';return;}fetch('/api/admin/users/add',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(data)}).then(function(r){return r.json()}).then(function(d){if(d.ok){$('nu-msg').textContent='创建成功';$('nu-msg').style.color='var(--success)';$('add-user-form').style.display='none';$('add-user-btn').style.display='inline-block';$('nu-username').value='';$('nu-password').value='';$('nu-display').value='';$('nu-skill').value='';$('nu-desc').value='';loadUsers();}else{$('nu-msg').textContent=d.error||'失败';$('nu-msg').style.color='var(--danger)';}});};
+});
+</script></body></html>
